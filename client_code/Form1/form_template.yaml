@@ -3,5 +3,13 @@ components:
   name: heading_1
   properties: {text: Uber Pickups in NYC}
   type: form:dep_lin1x4oec0ytd:_Components.Heading
+- layout_properties: {grid_position: 'ZWKPIX,OXTTAC'}
+  name: bar_chart
+  properties: {}
+  type: Plot
+- layout_properties: {grid_position: 'ZWKPIX,SZLHJL'}
+  name: mapbox_map
+  properties: {}
+  type: Plot
 container: {type: ColumnPanel}
 is_package: true
