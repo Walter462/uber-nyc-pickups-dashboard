@@ -19,3 +19,11 @@ def create_histogram():
   histogram = np.histogram(DATA['Date/Time'].dt.hour, bins=24)[0]
   return histogram
 
+@anvil.server.callable
+def get_map_data(hour=0):
+  filtered_data = DATA[DATA['Date/Time'].dt.hour == hour]
+  map_data = go.Scattermapbox(lat=filtered_data['Lat'],
+                             lon=filtered_data['Lon'],
+                             mode = 'markers')
+  return map_data
+  

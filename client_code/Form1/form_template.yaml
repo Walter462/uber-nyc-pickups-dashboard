@@ -5,17 +5,22 @@ components:
   type: form:dep_lin1x4oec0ytd:_Components.Heading
 - layout_properties: {grid_position: 'ZWKPIX,OXTTAC MJLPUG,KXCZOX'}
   name: spacer_1
-  properties: {height: 64.0047607421875}
+  properties: {height: 83.06500244140625}
   type: Spacer
 - layout_properties: {grid_position: 'ZWKPIX,OXTTAC DHETKA,EEKESV'}
   name: text_1
-  properties: {align: center, text: Number of Pickups per Hour}
+  properties: {align: left, bold: true, text: Number of Pickups per Hour}
   type: form:dep_lin1x4oec0ytd:_Components.Text
 - layout_properties: {grid_position: 'ZWKPIX,OXTTAC MVKYPT,RXKCDR'}
   name: bar_chart
   properties: {}
   type: Plot
-- layout_properties: {grid_position: 'ZWKPIX,SZLHJL IUSUMJ,QBFKTO'}
+- layout_properties: {grid_position: 'ZWKPIX,SZLHJL NQMVIP,LYVTUW'}
+  name: text_2
+  properties: {bold: true, text: Pick specific hour to see the Uber Pickups on New-York city map.}
+  type: form:dep_lin1x4oec0ytd:_Components.Text
+- event_bindings: {}
+  layout_properties: {grid_position: 'ZWKPIX,SZLHJL IUSUMJ,QBFKTO'}
   name: hour_dropdown
   properties: {}
   type: form:dep_lin1x4oec0ytd:_Components.DropdownMenu
