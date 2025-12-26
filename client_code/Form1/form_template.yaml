@@ -3,11 +3,27 @@ components:
   name: heading_1
   properties: {text: Uber Pickups in NYC}
   type: form:dep_lin1x4oec0ytd:_Components.Heading
-- layout_properties: {grid_position: 'ZWKPIX,OXTTAC'}
+- layout_properties: {grid_position: 'ZWKPIX,OXTTAC MJLPUG,KXCZOX'}
+  name: spacer_1
+  properties: {height: 64.0047607421875}
+  type: Spacer
+- layout_properties: {grid_position: 'ZWKPIX,OXTTAC DHETKA,EEKESV'}
+  name: text_1
+  properties: {align: center, text: Number of Pickups per Hour}
+  type: form:dep_lin1x4oec0ytd:_Components.Text
+- layout_properties: {grid_position: 'ZWKPIX,OXTTAC MVKYPT,RXKCDR'}
   name: bar_chart
   properties: {}
   type: Plot
-- layout_properties: {grid_position: 'ZWKPIX,SZLHJL'}
+- layout_properties: {grid_position: 'ZWKPIX,SZLHJL IUSUMJ,QBFKTO'}
+  name: hour_dropdown
+  properties: {}
+  type: form:dep_lin1x4oec0ytd:_Components.DropdownMenu
+- layout_properties: {grid_position: 'ZWKPIX,SZLHJL AUCQRU,XIXTRO'}
+  name: mapbox_title
+  properties: {}
+  type: form:dep_lin1x4oec0ytd:_Components.Text
+- layout_properties: {grid_position: 'ZWKPIX,SZLHJL POAGQC,KKBRAO'}
   name: mapbox_map
   properties: {}
   type: Plot
