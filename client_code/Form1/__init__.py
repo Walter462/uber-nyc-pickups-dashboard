@@ -31,4 +31,5 @@ class Form1(Form1Template):
   def hour_dropdown_change(self, **event_args):
     time = self.hour_dropdown.selected_value
     self.mapbox_title.text = f'Number of pickups at {time}:00'
-    self.mapbox_map.data = anvil.server.call('get_map_data', time)
+    with anvil.server.no_loading_indicator:
+      self.mapbox_map.data = anvil.server.call('get_map_data', time)

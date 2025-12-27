@@ -14,6 +14,10 @@ def get_uber_data():
   return df
 
 DATA = get_uber_data()
+#print(DATA)
+print(anvil.server.get_session_id())
+#anvil.server.session["DATA"] = DATA
+
 @anvil.server.callable
 def create_histogram():
   histogram = np.histogram(DATA['Date/Time'].dt.hour, bins=24)[0]
