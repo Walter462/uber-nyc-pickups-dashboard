@@ -7,6 +7,12 @@ import anvil.server
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+import logging
+
+logging.basicConfig(level = logging.DEBUG)
+uberPickups_logger = logging.getLogger('uberPickups')
+uberPickups_logger.setLevel(logging.DEBUG)
+formatter_
 
 def get_uber_data():
   df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows = 10000)
