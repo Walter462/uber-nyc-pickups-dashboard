@@ -9,19 +9,18 @@ import numpy as np
 import plotly.graph_objects as go
 import logging
 
-logging.basicConfig(level = logging.DEBUG)
-uberPickups_logger = logging.getLogger('uberPickups')
-uberPickups_logger.setLevel(logging.DEBUG)
-formatter_
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger()
 
 def get_uber_data():
+  logger.debug("Reading file")  
   df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows = 10000)
   df['Date/Time'] = pd.to_datetime(df['Date/Time'])
   return df
 
 DATA = get_uber_data()
 #print(DATA)
-print(anvil.server.get_session_id())
+#print(anvil.server.get_session_id())
 #anvil.server.session["DATA"] = DATA
 
 @anvil.server.callable
@@ -31,7 +30,9 @@ def create_histogram():
 
 @anvil.server.callable
 def get_map_data(hour=0):
+  
   filtered_data = DATA[DATA['Date/Time'].dt.hour == hour]
+  
   map_data = go.Scattermapbox(lat=filtered_data['Lat'],
                              lon=filtered_data['Lon'],
                              mode = 'markers')
