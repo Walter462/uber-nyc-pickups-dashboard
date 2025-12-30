@@ -19,18 +19,20 @@ def data_filter_perfomance_logging(logger_name='data_filter', enable=True, level
   if enable:
     logger.setLevel(level)
     if not logger.handlers:
-      console = logging.StreamHandler()
+      # Use Anvil's built-in logger
+      logger.addHandler(logging.StreamHandler())
       formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-      console.setFormatter(formatter)
-      logger.addHandler(console)
+      logger.handlers[0].setFormatter(formatter)
   else:
     logger.disabled = True
 
 def get_uber_data():
-  data_filter_perfomance_logging()
-  logger = logging.getLogger('data_filter')
-  logger.debug("Logger test message")
-  print("Function to log test message")  # Add this line to verify the function is being called
+  basic_anvil_logging()
+  #basic_anvil_logging()
+  #data_filter_perfomance_logging()
+  #logger = logging.getLogger('data_filter')
+  #logger.debug("Custom logger test message")
+  #print("Function to log test message")  # Add this line to verify the function is being called
   df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows=10000)
   df['Date/Time'] = pd.to_datetime(df['Date/Time'])
   return df
