@@ -10,13 +10,11 @@ import plotly.graph_objects as go
 import logging
 
 def basic_anvil_logging():
-  logging.basicConfig(level=logging.DEBUG, 
+  logging.basicConfig(level=logging.DEBUG,
                       format='%(asctime)s - %(levelname)s - %(message)s')
   return logging.getLogger()
 
-def data_filter_perfomance_logging(logger_name = 'data_filter',
-                                  enable = True,
-                                  level = logging.DEBUG):
+def data_filter_perfomance_logging(logger_name='data_filter', enable=True, level=logging.DEBUG):
   logger = logging.getLogger(logger_name)
   if enable:
     logger.setLevel(level)
@@ -27,14 +25,13 @@ def data_filter_perfomance_logging(logger_name = 'data_filter',
       logger.addHandler(console)
   else:
     logger.disabled = True
-  
+
 def get_uber_data():
-  #basic_anvil_logging()
   data_filter_perfomance_logging()
   logger = logging.getLogger('data_filter')
   logger.debug("Logger test message")
-  print("Funtion to log is called")
-  df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows = 10000)
+  print("Function to log test message")  # Add this line to verify the function is being called
+  df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows=10000)
   df['Date/Time'] = pd.to_datetime(df['Date/Time'])
   return df
 
@@ -49,7 +46,6 @@ def create_histogram():
 def get_map_data(hour=0):
   filtered_data = DATA[DATA['Date/Time'].dt.hour == hour]
   map_data = go.Scattermapbox(lat=filtered_data['Lat'],
-                             lon=filtered_data['Lon'],
-                             mode = 'markers')
+                              lon=filtered_data['Lon'],
+                              mode = 'markers')
   return map_data
-  
