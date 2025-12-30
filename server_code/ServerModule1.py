@@ -19,9 +19,6 @@ def get_uber_data():
   return df
 
 DATA = get_uber_data()
-#print(DATA)
-#print(anvil.server.get_session_id())
-#anvil.server.session["DATA"] = DATA
 
 @anvil.server.callable
 def create_histogram():
@@ -30,9 +27,7 @@ def create_histogram():
 
 @anvil.server.callable
 def get_map_data(hour=0):
-  
   filtered_data = DATA[DATA['Date/Time'].dt.hour == hour]
-  
   map_data = go.Scattermapbox(lat=filtered_data['Lat'],
                              lon=filtered_data['Lon'],
                              mode = 'markers')
