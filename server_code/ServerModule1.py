@@ -9,11 +9,29 @@ import numpy as np
 import plotly.graph_objects as go
 import logging
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger()
+def basic_anvil_logging():
+  logging.basicConfig(level=logging.DEBUG, 
+                      format='%(asctime)s - %(levelname)s - %(message)s')
+  return logging.getLogger()
 
+def data_filter_perfomance_logging(logger_name = 'data_filter',
+                                  enable = True,
+                                  level = logging.DEBUG):
+  logger = logging.getLogger(logger_name)
+  if enable:
+    logger.setLevel(level)
+    if not logger.handlers:
+      console = logging.StreamHandler()
+      formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+      console.setFormatter(formatter)
+      logger.addHandler(console)
+    else:
+      logger.disabled = True
+  
 def get_uber_data():
-  logger.debug("Reading file")  
+  basic_anvil_logging()
+  data_filter_perfomance_logging()
+  logging.getLogger('data_filter').debug("Logger test message")
   df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows = 10000)
   df['Date/Time'] = pd.to_datetime(df['Date/Time'])
   return df
