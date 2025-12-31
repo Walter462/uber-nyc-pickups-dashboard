@@ -15,6 +15,15 @@ def basic_anvil_logging():
                       format='%(asctime)s - %(levelname)s - %(message)s')
   return logging.getLogger()
 
+def default_server_logging(logger_name = 'server'):
+  logger = logging.getLogger(logger_name)
+  handler = logging.StreamHandler(sys.stdout)
+  logger.addHandler(handler)
+  formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+  handler.setFormatter(formatter)
+  return logger
+  
+  
 def data_filter_performance_logging(logger_name='data_filter',
                                     enable=True,
                                     level=logging.DEBUG,
@@ -38,10 +47,16 @@ def data_filter_performance_logging(logger_name='data_filter',
 
 def get_uber_data():
   #basic_anvil_logging()
-  data_filter_performance_logging()
-  logger = logging.getLogger('data_filter')
+  
+  #data_filter_performance_logging()
+  #logger = logging.getLogger('data_filter')
+  default_server_logging()
+  logger = logging.getLogger('server')
+  
   logger.debug("Custom logger test message")
   #print("Function to log test message")  # Add this line to verify the function is being called
+
+  
   df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows=10000)
   df['Date/Time'] = pd.to_datetime(df['Date/Time'])
   return df
