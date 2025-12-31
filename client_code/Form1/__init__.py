@@ -6,7 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import m3.components as m3
-import logging 
+import logging
 
 class Form1(Form1Template):
   def __init__(self, **properties):
