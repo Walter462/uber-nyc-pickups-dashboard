@@ -30,6 +30,12 @@ class Form1(Form1Template):
 
   @handle("hour_dropdown", "change")
   def hour_dropdown_change(self, **event_args):
+    #logging
+    #logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    #logger = logging.getLogger()
+    logger = anvil.server.call('basic_anvil_logging')
+    logger.info("Start")
+    
     time = self.hour_dropdown.selected_value
     self.mapbox_title.text = f'Number of pickups at {time}:00'
     with anvil.server.no_loading_indicator:
