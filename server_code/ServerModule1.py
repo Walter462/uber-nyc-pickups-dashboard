@@ -15,7 +15,6 @@ def basic_anvil_logging():
                       format='%(asctime)s - %(levelname)s - %(message)s')
   return logging.getLogger()
 
-
 def data_filter_performance_logging(
   logger_name='data_filter',
   enable=True,
