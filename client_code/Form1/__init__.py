@@ -6,7 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import m3.components as m3
-import logging
+#import logging
 
 class Form1(Form1Template):
   def __init__(self, **properties):
@@ -30,9 +30,8 @@ class Form1(Form1Template):
 
   @handle("hour_dropdown", "change")
   def hour_dropdown_change(self, **event_args):
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-    logger = logging.getLogger()
-    logger.info("Start")
+    logger = anvil.server.call()
+    logger.debug("Start")
     time = self.hour_dropdown.selected_value
     self.mapbox_title.text = f'Number of pickups at {time}:00'
     with anvil.server.no_loading_indicator:
