@@ -1,5 +1,4 @@
 from datetime import datetime
-print(f"{datetime.now()} - server dependencies loading ")
 import anvil.files
 from anvil.files import data_files
 import anvil.tables as tables
