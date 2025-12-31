@@ -18,6 +18,7 @@ def basic_anvil_logging():
   logger = logging.getLogger()
   return logger
 
+@anvil.server.callable
 def default_server_logging(logger_name = 'server'):
   logger = logging.getLogger(logger_name)
   handler = logging.StreamHandler(sys.stdout)

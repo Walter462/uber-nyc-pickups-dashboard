@@ -6,5 +6,5 @@ unique_ids:
   modules: {}
   scripts: {}
   server_modules:
-    AppLogger: '176715476329878096109203.00291'
+    AppServerLogger: '176715476329878096109203.00291'
     ServerModule1: '1766725312774420428344579.1419'

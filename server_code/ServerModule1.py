@@ -9,20 +9,12 @@ import numpy as np
 import plotly.graph_objects as go
 #logging
 import logging
-import AppLogger
+import AppServerLogger
 
 def get_uber_data():
-  #basic_anvil_logging()
-  
-  #data_filter_performance_logging()
-  #logger = logging.getLogger('data_filter')
-  AppLogger.default_server_logging()
+  AppServerLogger.default_server_logging()
   logger = logging.getLogger('server')
-  
   logger.debug("Custom logger test message")
-  #print("Function to log test message")  # Add this line to verify the function is being called
-
-  
   df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows=10000)
   df['Date/Time'] = pd.to_datetime(df['Date/Time'])
   return df
