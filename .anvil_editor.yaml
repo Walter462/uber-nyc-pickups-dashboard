@@ -3,7 +3,8 @@ unique_ids:
     theme.css: 6G44GIEQQRJLILWU6GQSQO5BTDFT5ZI3
   forms:
     Form1: '1766716660152840969058542.7982'
-  modules: {}
+  modules:
+    AppClientLogger: '1767165036263740198659454.263'
   scripts: {}
   server_modules:
     AppServerLogger: '176715476329878096109203.00291'
