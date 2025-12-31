@@ -15,18 +15,14 @@ def basic_anvil_logging():
                       format='%(asctime)s - %(levelname)s - %(message)s')
   return logging.getLogger()
 
-def data_filter_performance_logging(
-  logger_name='data_filter',
-  enable=True,
-  level=logging.DEBUG,
-  force=True
-):
+def data_filter_performance_logging(logger_name='data_filter',
+                                    enable=True,
+                                    level=logging.DEBUG,
+                                    force=True):
   logger = logging.getLogger(logger_name)
-
   if not enable:
     logger.disabled = True
     return logger
-
   logger.disabled = False
   logger.setLevel(level)
 
@@ -35,12 +31,9 @@ def data_filter_performance_logging(
 
   if not logger.handlers:
     handler = logging.StreamHandler(sys.stdout)
-    formatter = logging.Formatter(
-      '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     handler.setFormatter(formatter)
     logger.addHandler(handler)
-
   return logger
 
 def get_uber_data():
