@@ -1,11 +1,18 @@
 from ._anvil_designer import Form1Template
 from anvil import *
+import anvil.files
 import anvil.server
 import plotly.graph_objects as go
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import m3.components as m3
+from datetime import datetime
+from anvil.files import data_files
+
+import pandas as pd
+import numpy as np
+import plotly.graph_objects as go
 
 from .. import AppClientLogger
 import logging
@@ -14,6 +21,8 @@ class Form1(Form1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.data = self.get_uber_data()
+    
     Plot.templates.default = 'rally'
     # Histogram on uber pickup per hour
     self.bar_chart.data = go.Bar(y=anvil.server.call('create_histogram'))
@@ -41,3 +50,8 @@ class Form1(Form1Template):
       logger.debug("Send get_map_data() server request")
       self.mapbox_map.data = anvil.server.call('get_map_data', time)
     logger.debug("End")
+
+  def get_uber_data(self):
+    df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows=10000)
+    df['Date/Time'] = pd.to_datetime(df['Date/Time'])
+    return df
