@@ -7,7 +7,6 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import m3.components as m3
 from datetime import datetime
-from 
 
 import pandas as pd
 import numpy as np
@@ -50,6 +49,7 @@ class Form1(Form1Template):
       self.mapbox_map.data = anvil.server.call('get_map_data', time)
     logger.debug("End")
 
+  ##################################################################################
   def get_uber_data(self):
     df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows=10000)
     df['Date/Time'] = pd.to_datetime(df['Date/Time'])
