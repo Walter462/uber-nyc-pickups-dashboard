@@ -6,21 +6,17 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import m3.components as m3
+#data
 from datetime import datetime
-
-import pandas as pd
-import numpy as np
 import plotly.graph_objects as go
-
-from .. import AppClientLogger
+#logging
 import logging
+from .. import AppLogger
 
 class Form1(Form1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.data = self.get_uber_data()
-    
     Plot.templates.default = 'rally'
     # Histogram on uber pickup per hour
     self.bar_chart.data = go.Bar(y=anvil.server.call('create_histogram'))
@@ -39,7 +35,7 @@ class Form1(Form1Template):
 
   @handle("hour_dropdown", "change")
   def hour_dropdown_change(self, **event_args):
-    logger = AppClientLogger.basic_anvil_logging()
+    logger = AppLogger.basic_anvil_logging()
     logger.debug("Start")
     time = self.hour_dropdown.selected_value
     self.mapbox_title.text = f'Number of pickups at {time}:00'

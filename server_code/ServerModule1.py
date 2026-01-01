@@ -10,12 +10,13 @@ import numpy as np
 import plotly.graph_objects as go
 #logging
 import logging
-import AppServerLogger
+import AppLogger
+from .. import DataFilters
 
 print(f"{datetime.now()} - server UP")
 
 def get_uber_data():
-  AppServerLogger.default_server_logging()
+  AppLogger.default_server_logging()
   logger = logging.getLogger('server')
   logger.debug("get_uber_data().read_csv start")
   df = pd.read_csv(data_files['uber-raw-data-sep14.csv'], nrows=10000)
