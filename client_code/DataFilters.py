@@ -9,10 +9,7 @@ import anvil.files
 from anvil.files import data_files
 from datetime import datetime
 import plotly.graph_objects as go
-#logging
-from .. import AppLogger
-import logging
-import AppServerLogger
+
 
 
 # This is a module.

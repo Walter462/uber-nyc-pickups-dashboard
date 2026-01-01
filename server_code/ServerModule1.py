@@ -11,7 +11,7 @@ import plotly.graph_objects as go
 #logging
 import logging
 import AppLogger
-from .. import DataFilters
+import DataFilters
 
 print(f"{datetime.now()} - server UP")
 
