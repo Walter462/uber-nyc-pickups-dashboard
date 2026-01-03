@@ -44,25 +44,34 @@ def get_map_data(hour=0):
   DATA = get_uber_data()
   filtered_data = DATA[DATA['Date/Time'].dt.hour == hour]
   logger.debug("get_map_data() end")
-  map_data = go.Scattermapbox(lat=filtered_data['Lat'],
+  # Plotly trace for the map
+  map_data_plot = go.Scattermapbox(lat=filtered_data['Lat'],
                               lon=filtered_data['Lon'],
                               mode = 'markers')
-  return map_data
+  # Clean coordinate pairs (for AI / analytics)
+  coordinate_pairs = list(
+    zip(filtered_data['Lat'].tolist(),
+        filtered_data['Lon'].tolist())
+  )
+  print(coordinate_pairs)
+  return {"map_trace": map_data_plot,
+          "coordinates": coordinate_pairs 
+  }
 
 @anvil.server.callable
-def getresponse(prompt, map_data): 
+def getresponse(prompt, map_data, pickup_hour_statistics): 
   client = OpenAI(api_key=anvil.secrets.get_secret("open_ai_key")) # saved openAI key in the "Secrets" module as "open_ai_key"
   completion = client.chat.completions.create(
-    model="gpt-3.5-turbo-16k", # Add or adjust the model you want to use here. See "https://platform.openai.com/docs/models" for the model list
+    model="gpt-4.1-mini", # Add or adjust the model you want to use here. See "https://platform.openai.com/docs/models" for the model list
     messages=[
       {"role": "system", "content": (
         "You are an expert in urban mobility, ride-hailing logistics, "
         "and Uber driver earnings optimization. You give practical, "
-        "location-aware advice based on geographic demand data."
+        "location-aware advice based on geographic and hours demand data."
       )},
       {"role": "user","content": (
         "Here is relevant map and demand data in JSON format:\n"
-        f"{map_data}"
+      f"{map_data} in a specified 24-format hour value: {pickup_hour_statistics}"
       )
       }
     ]

@@ -46,19 +46,21 @@ class Form1(Form1Template):
     self.mapbox_title.text = f'Number of pickups at {time}:00'
     logger.debug("Fetching map data")
     logger.debug("Send get_map_data() server request")
-    self.mapbox_map.data = anvil.server.call('get_map_data', time)
-    trace = self.mapbox_map.data[0]
-    lats = trace.lat
-    lons = trace.lon
-    coordinates = list(zip(lats, lons))
-    print(coordinates) 
+    map_data = anvil.server.call('get_map_data', time)
+    self.mapbox_map.data = map_data['map_trace']
+    self.pickup_coordinates = map_data['coordinates']
+    self.pickup_hour_statistics = time
     logger.debug("End")
 
   @handle("submit", "click")
   def submit_click(self, **event_args):
     """This method is called when the component is clicked."""
     prompt = self.prompt.text
-    map_data = self.mapbox_map.data
-    response = anvil.server.call('getresponse', prompt)
+    map_data = self.pickup_coordinates
+    print(map_data)
+    response = anvil.server.call('getresponse', 
+                                 prompt = prompt, 
+                                 map_data = map_data,
+                                 pickup_hour_statistics = self.pickup_hour_statistics)
     self.response.text = response
     pass
