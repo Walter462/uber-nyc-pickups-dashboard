@@ -34,7 +34,25 @@ components:
   type: Plot
 - layout_properties: {grid_position: 'WGVRCQ,GWLQUA'}
   name: prompt
-  properties: {appearance: outlined, placeholder: enter prompt here, supporting_text: '', text: ''}
+  properties: {appearance: outlined, character_limit: 1000, display_bold: false, display_italic: false, display_underline: false, height: 100, label: User prompt, placeholder: Your prompt here for OpenAI ChatGPT, supporting_text: This prompt will be sent to OpenAI along with the filtered data context., text: ''}
+  type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextArea
+- data_bindings: []
+  event_bindings: {}
+  layout_properties: {grid_position: 'UVQZEW,MCXKJR'}
+  name: submit
+  properties: {align: right, appearance: outlined, icon: 'mi:subdirectory_arrow_left', text: SUBMIT}
+  type: form:dep_lin1x4oec0ytd:_Components.Button
+- layout_properties: {grid_position: 'XCAEQN,JDCING'}
+  name: response1
+  properties: {appearance: outlined, label: AI response, placeholder: What Open AI Chat GPT 'thinks' about your input., visible: false}
+  type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
+- layout_properties: {grid_position: 'NPKNOZ,HEBVGM'}
+  name: text_3
+  properties: {align: left, text: 'AI response:'}
+  type: form:dep_lin1x4oec0ytd:_Components.Text
+- layout_properties: {grid_position: 'KGTTCI,RRMOGX'}
+  name: response
+  properties: {appearance: outlined, label: '', placeholder: ''}
   type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextArea
 container: {type: ColumnPanel}
 is_package: true

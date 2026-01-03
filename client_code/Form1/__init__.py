@@ -49,3 +49,12 @@ class Form1(Form1Template):
     logger.debug("Send get_map_data() server request")
     self.mapbox_map.data = anvil.server.call('get_map_data', time)
     logger.debug("End")
+
+  @handle("submit", "click")
+  def submit_click(self, **event_args):
+    """This method is called when the component is clicked."""
+    prompt = self.prompt.text
+    map_data = self.mapbox_map.data
+    response = anvil.server.call('getresponse', prompt)
+    self.response.text = response
+    pass
