@@ -5,7 +5,6 @@ unique_ids:
     Form1: '1766716660152840969058542.7982'
   modules:
     AppLogger: '1767165036263740198659454.263'
-    DataFilters: '1767238538427783651033915.1394'
   scripts: {}
   server_modules:
     ServerModule1: '1766725312774420428344579.1419'

@@ -10,6 +10,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+from typing import List, Tuple, Dict, Set
 #data
 import pandas as pd
 import numpy as np
@@ -18,7 +19,6 @@ from openai import OpenAI
 #logging
 import logging
 import AppLogger
-import DataFilters
 
 print(f"{datetime.now()} - server UP")
 
@@ -53,10 +53,8 @@ def get_map_data(hour=0):
     zip(filtered_data['Lat'].tolist(),
         filtered_data['Lon'].tolist())
   )
-  print(coordinate_pairs)
   return {"map_trace": map_data_plot,
-          "coordinates": coordinate_pairs 
-  }
+          "coordinates": coordinate_pairs}
 
 @anvil.server.callable
 def getresponse(prompt, map_data, pickup_hour_statistics): 
@@ -71,7 +69,7 @@ def getresponse(prompt, map_data, pickup_hour_statistics):
       )},
       {"role": "user","content": (
         "Here is relevant map and demand data in JSON format:\n"
-      f"{map_data} in a specified 24-format hour value: {pickup_hour_statistics}"
+      f"{map_data}\n in a specific hour (24h format): {pickup_hour_statistics}"
       )
       }
     ]
