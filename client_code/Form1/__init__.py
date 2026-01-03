@@ -1,5 +1,9 @@
 from ._anvil_designer import Form1Template
 from anvil import *
+import anvil.facebook.auth
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+import anvil.users
 import anvil.server
 import plotly.graph_objects as go
 import anvil.tables as tables
@@ -16,6 +20,7 @@ from .. import AppLogger
 class Form1(Form1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
+    anvil.users.login_with_form()
     self.init_components(**properties)
     Plot.templates.default = 'rally'
     # Histogram on uber pickup per hour
