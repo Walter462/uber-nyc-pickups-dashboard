@@ -39,6 +39,9 @@ def create_histogram():
 
 @anvil.server.callable
 def get_map_data(hour=0):
+  """
+  Filter uber pickup data for a specific date and prepare.
+  """
   logger = logging.getLogger('server')
   logger.debug("get_map_data()(request recieved) start execution")
   DATA = get_uber_data()
@@ -53,11 +56,12 @@ def get_map_data(hour=0):
     zip(filtered_data['Lat'].tolist(),
         filtered_data['Lon'].tolist())
   )
+  print(coordinate_pairs)
   return {"map_trace": map_data_plot,
           "coordinates": coordinate_pairs}
 
 @anvil.server.callable
-def getresponse(prompt, map_data, pickup_hour_statistics): 
+def get_ai_response(prompt, pickup_hour, pickup_hour_coordinate_pairs): 
   client = OpenAI(api_key=anvil.secrets.get_secret("open_ai_key")) # saved openAI key in the "Secrets" module as "open_ai_key"
   completion = client.chat.completions.create(
     model="gpt-4.1-mini", # Add or adjust the model you want to use here. See "https://platform.openai.com/docs/models" for the model list
@@ -68,8 +72,8 @@ def getresponse(prompt, map_data, pickup_hour_statistics):
         "location-aware advice based on geographic and hours demand data."
       )},
       {"role": "user","content": (
-        "Here is relevant map and demand data in JSON format:\n"
-      f"{map_data}\n in a specific hour (24h format): {pickup_hour_statistics}"
+        "Here is relevant map and demand data (list of tuples - pickup coordinates pairs (lat,lon)):\n"
+      f"{pickup_hour_coordinate_pairs}\n for a specified hour (24h format): {pickup_hour}"
       )
       }
     ]

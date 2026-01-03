@@ -22,8 +22,8 @@ class Form1(Form1Template):
     # Set Form properties and Data Bindings.
     anvil.users.login_with_form()
     self.init_components(**properties)
-    self.pickup_coordinate_pairs: list = None
     self.pickup_hour: int = None
+    self.pickup_hour_coordinate_pairs: list = None
     # Plots
     Plot.templates.default = 'rally'
     # Histogram on uber pickup per hour
@@ -32,35 +32,34 @@ class Form1(Form1Template):
     # Initialise the dropdown and map
     self.hour_dropdown.items =[(f'{n}:00', n) for n in range(0,24)]
     self.hour_dropdown.selected_value = 0
-    self.hour_dropdown_change() #plot default hour map
-    
+    self.hour_dropdown_change() #plot default 0-hour map
     self.mapbox_map.layout.mapbox = dict(
       style="carto-positron", #[open-street-map, carto-positron, carto-darkmatter, white-bg]
       center = dict(lat=40.7128, lon=-74.0060), 
-      zoom=100)
+      zoom=10)
     self.mapbox_map.layout.margin = dict(t=0, b=0, l=0, r=0)
 
   @handle("hour_dropdown", "change")
   def hour_dropdown_change(self, **event_args):
     logger = AppLogger.basic_anvil_logging()
-    time = self.hour_dropdown.selected_value
-    self.mapbox_title.text = f'Number of pickups at {time}:00'
+    pickup_hour = self.hour_dropdown.selected_value
+    self.pickup_hour = pickup_hour
+    self.mapbox_title.text = f'Number of pickups at {pickup_hour}:00'
     logger.debug("Fetching map data: send get_map_data() server request")
-    map_data = anvil.server.call('get_map_data', time)
+    map_data = anvil.server.call('get_map_data', pickup_hour)
     self.mapbox_map.data = map_data['map_trace']
-    self.pickup_coordinate_pairs = map_data['coordinates']
-    self.pickup_hour = time
+    self.pickup_hour_coordinate_pairs = map_data['coordinates']
     logger.debug("End")
 
   @handle("submit", "click")
   def submit_click(self, **event_args):
     """This method is called when the component is clicked."""
     prompt = self.prompt.text
-    map_data = self.pickup_coordinate_pairs
+    pickup_hour_coordinate_pairs = self.pickup_hour_coordinate_pairs
     print(map_data)
-    response = anvil.server.call('getresponse', 
+    response = anvil.server.call('get_ai_response', 
                                  prompt = prompt, 
-                                 map_data = map_data,
-                                 pickup_hour = self.pickup_hour)
+                                 pickup_hour = self.pickup_hour,
+                                 pickup_hour_coordinate_pairs = pickup_hour_coordinate_pairs)
     self.response.text = response
     pass
