@@ -44,26 +44,30 @@ def get_map_data(hour=0):
   DATA = get_uber_data()
   filtered_data = DATA[DATA['Date/Time'].dt.hour == hour]
   logger.debug("get_map_data() end")
-  
   map_data = go.Scattermapbox(lat=filtered_data['Lat'],
                               lon=filtered_data['Lon'],
                               mode = 'markers')
   return map_data
 
-
-
 @anvil.server.callable
-def getresponse(prompt): 
+def getresponse(prompt, map_data): 
   client = OpenAI(api_key=anvil.secrets.get_secret("open_ai_key")) # saved openAI key in the "Secrets" module as "open_ai_key"
   completion = client.chat.completions.create(
     model="gpt-3.5-turbo-16k", # Add or adjust the model you want to use here. See "https://platform.openai.com/docs/models" for the model list
     messages=[
-      {"role": "system", "content": "You are a helpful assistant."},
-      {"role": "user", "content": prompt} 
+      {"role": "system", "content": (
+        "You are an expert in urban mobility, ride-hailing logistics, "
+        "and Uber driver earnings optimization. You give practical, "
+        "location-aware advice based on geographic demand data."
+      )},
+      {"role": "user","content": (
+        "Here is relevant map and demand data in JSON format:\n"
+        f"{map_data}"
+      )
+      }
     ]
   )
   # Extract the response content
-  reply = completion.choices[0].message
-  response = reply.content
-  print(response)
-  return response
+  reply = completion.choices[0].message.content
+  print(reply)
+  return reply

@@ -45,9 +45,13 @@ class Form1(Form1Template):
     time = self.hour_dropdown.selected_value
     self.mapbox_title.text = f'Number of pickups at {time}:00'
     logger.debug("Fetching map data")
-    #with anvil.server.no_loading_indicator:
     logger.debug("Send get_map_data() server request")
     self.mapbox_map.data = anvil.server.call('get_map_data', time)
+    trace = self.mapbox_map.data[0]
+    lats = trace.lat
+    lons = trace.lon
+    coordinates = list(zip(lats, lons))
+    print(coordinates) 
     logger.debug("End")
 
   @handle("submit", "click")
