@@ -1,3 +1,4 @@
+import anvil.secrets
 import anvil.facebook.auth
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
 from anvil.google.drive import app_files
@@ -9,9 +10,11 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+#data
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+from openai import OpenAI
 #logging
 import logging
 import AppLogger
@@ -46,3 +49,20 @@ def get_map_data(hour=0):
                               lon=filtered_data['Lon'],
                               mode = 'markers')
   return map_data
+
+
+
+@anvil.server.callable
+def openAI_chat(user_input: str): 
+  client = OpenAI(api_key=anvil.secrets.get_secret("open_ai_key")) # Saved openAI key in the `Secrets' module and call it "open_ai_key"
+  completion = client.chat.completions.create(
+    model="gpt-3.5-turbo-16k", # Add or adjust the model you want to use here. See "https://platform.openai.com/docs/models" for the model list
+    messages=[
+      {"role": "system", "content": "You are a helpful assistant."},
+      {"role": "user", "content": user_input} 
+    ],
+  )
+  # Extract the response content and token count
+  agent_response = completion.choices[0].message.content
+  print(agent_response)
+  return agent_response, token_count

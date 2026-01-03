@@ -55,6 +55,10 @@ runtime_options:
   client_version: '3'
   server_spec: {base: python310-datascience}
   version: 3
+secrets:
+  open_ai_key:
+    type: secret
+    value: {A4GXX3AWQWPDDMBC: zScIs8XDl6Rmh3bPBjiGpEWXPd0IdX0luaeNcxhTU5DgNrK9UbZwYh+D9THkTUqfQO2QxsvQzYYTqDjsYx46BRe4HAugNmX4WeErIgWpP0nXGL/XQXGZrlnHee7Znwq5YVMXiwSCrzuwY89BattUZXIDl96uO1SZIi1kjCxsth9D3PHyFIqE5OE9FIkin6t/1AmYd7OUsxLzOT122zIli9XE42W3Jd/J6kp7fEueY2cQsbM5xN9WGRCjVVyZIs4dgHAbNIGULCQBbFixRdR5m52/y7inLrdCJLjWZ4WqDWxmyXTIWizLUiFZTT4KoiLsg0Ii9lOG7+KvzIJ0hps5tYLz5A==}
 services:
 - client_config: {}
   server_config: {}
@@ -71,4 +75,7 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/facebook.yml
+- client_config: {}
+  server_config: {}
+  source: /runtime/services/anvil/secrets.yml
 startup_form: Form1
