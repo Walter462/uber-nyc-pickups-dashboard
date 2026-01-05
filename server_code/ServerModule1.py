@@ -21,9 +21,10 @@ from openai import OpenAI
 import logging
 import AppLogger
 
-AppLogger.default_server_logging()
-logger = logging.getLogger('server')
-logger.debug(f"{datetime.now()} - server UP")
+#logger setup
+logger = AppLogger.default_server_logging(level=logging.DEBUG)
+
+logger.debug("Server is UP")
 
 def get_uber_data()->pd.DataFrame:
   """
@@ -78,7 +79,7 @@ def get_map_data(hour: int = 0)->dict:
     zip(filtered_data['Lat'].tolist(),
         filtered_data['Lon'].tolist())
   )
-  print(coordinate_pairs)
+  logger.debug(f"Coordinate pairs: {coordinate_pairs}")
   return {"hour_map_trace": map_data_plot,
           "pickup_hour_coordinate_pairs": coordinate_pairs}
 
