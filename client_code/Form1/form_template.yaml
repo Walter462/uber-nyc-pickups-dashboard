@@ -34,7 +34,7 @@ components:
   type: Plot
 - layout_properties: {grid_position: 'WGVRCQ,GWLQUA'}
   name: prompt
-  properties: {appearance: outlined, character_limit: 1000, display_bold: false, display_italic: false, display_underline: false, height: 100, label: User prompt, placeholder: Your prompt here for OpenAI ChatGPT, supporting_text: This prompt will be sent to OpenAI along with the filtered data context., text: ''}
+  properties: {appearance: outlined, character_limit: 1000, display_bold: false, display_italic: false, display_underline: false, height: 100, label: User prompt, placeholder: Your prompt here for OpenAI ChatGPT, supporting_text: This prompt will be sent to OpenAI along with the filtered data context., text: 'Hello, I am an Uber driver. Which location should I drive to to get an order with a highest success rate?'}
   type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextArea
 - data_bindings: []
   event_bindings: {}
