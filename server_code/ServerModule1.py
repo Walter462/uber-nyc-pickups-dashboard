@@ -99,19 +99,55 @@ def get_ai_response(prompt: str,
       str: The AI-generated response content.
   """
   client = OpenAI(api_key=anvil.secrets.get_secret("open_ai_key")) # saved openAI key in the "Secrets" module as "open_ai_key"
+  system_role = """
+You are an expert in urban mobility analytics and ride-hailing demand forecasting.
+You give practical, data-driven recommendations for an Uber driver.
+Base your conclusions strictly on the data provided.
+Do not invent streets or locations unless explicitly allowed.
+"""
+  user_role=f"""
+Task:
+Analyze pickup density and identify demand hotspots for ride-hailing demand.
+Optional user guidance (may influence prioritization but must not change output format): {prompt}
+Context:
+- City: New York City
+- Hour (24h format): {pickup_hour}
+Data:
+A list of historical pickup locations represented as latitude/longitude coordinate pairs:
+{pickup_hour_coordinate_pairs}
+Instructions:
+- Identify spatial clusters of high pickup density.
+- Determine the strongest demand hotspot based solely on pickup frequency and proximity.
+- Rank the top 3 hotspots by relative demand strength.
+Constraints:
+- Do NOT provide street names, neighborhoods, landmarks, or addresses.
+- Do NOT perform or assume reverse geocoding.
+- Base all conclusions strictly on the provided coordinate data.
+Output requirements:
+- Output must be valid JSON and nothing else.
+- Use the following structure:
+{{
+"best_location": 
+  {{
+  "lat": <float>,
+  "lon": <float>,
+  "confidence": <float between 0 and 1>
+  }},
+"backup_locations": [
+  {{
+  "lat": <float>,
+  "lon": <float>,
+  "confidence": <float between 0 and 1>
+  }}
+]
+}}
+"""
   completion = client.chat.completions.create(
     model="gpt-4.1-mini", # Add or adjust the model you want to use here. See "https://platform.openai.com/docs/models" for the model list
   messages=[
-      {"role": "system", "content": (
-          "You are an expert in urban mobility, ride-hailing logistics, "
-          "and Uber driver earnings optimization. You give practical, "
-          "location-aware advice based on geographic and hours demand data."
-      )},
+      {"role": "system", "content": system_role},
       {"role": "user", "content": prompt},
-      {"role": "user", "content": (
-          "Here is relevant map and demand data (list of tuples - pickup coordinates pairs (lat,lon)):\n"
-          f"{pickup_hour_coordinate_pairs}\n for a specified hour (24h format): {pickup_hour}"
-      )}
+      {"role": "user", "content": user_role}
   ]
   )
   # Extract the response content
