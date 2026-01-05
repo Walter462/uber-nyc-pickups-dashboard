@@ -6,9 +6,9 @@ from anvil.google.drive import app_files
 import anvil.users
 import anvil.server
 import plotly.graph_objects as go
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
+#import anvil.tables as tables
+#import anvil.tables.query as q
+#from anvil.tables import app_tables
 import m3.components as m3
 #data
 from datetime import datetime
@@ -38,28 +38,27 @@ class Form1(Form1Template):
       center = dict(lat=40.7128, lon=-74.0060), 
       zoom=10)
     self.mapbox_map.layout.margin = dict(t=0, b=0, l=0, r=0)
+    #logging
+    self.logger = AppLogger.basic_anvil_logging()
 
   @handle("hour_dropdown", "change")
   def hour_dropdown_change(self, **event_args):
-    logger = AppLogger.basic_anvil_logging()
     pickup_hour = self.hour_dropdown.selected_value
     self.pickup_hour = pickup_hour
     self.mapbox_title.text = f'Number of pickups at {pickup_hour}:00'
-    logger.debug("Fetching map data: send get_map_data() server request")
-    map_data = anvil.server.call('get_map_data', pickup_hour)
-    self.mapbox_map.data = map_data['map_trace']
-    self.pickup_hour_coordinate_pairs = map_data['coordinates']
-    logger.debug("End")
+    self.logger.debug("Fetching map data: send get_map_data() server request")
+    hour_map_data = anvil.server.call('get_map_data', pickup_hour)
+    self.mapbox_map.data = hour_map_data['hour_map_trace']
+    self.pickup_hour_coordinate_pairs = hour_map_data['pickup_hour_coordinate_pairs']
+    self.logger.debug("End")
 
   @handle("submit", "click")
   def submit_click(self, **event_args):
     """This method is called when the component is clicked."""
     prompt = self.prompt.text
     pickup_hour_coordinate_pairs = self.pickup_hour_coordinate_pairs
-    print(map_data)
     response = anvil.server.call('get_ai_response', 
-                                 prompt = prompt, 
-                                 pickup_hour = self.pickup_hour,
-                                 pickup_hour_coordinate_pairs = pickup_hour_coordinate_pairs)
+                                prompt = prompt, 
+                                pickup_hour = self.pickup_hour,
+                                pickup_hour_coordinate_pairs = self.pickup_hour_coordinate_pairs)
     self.response.text = response
-    pass
