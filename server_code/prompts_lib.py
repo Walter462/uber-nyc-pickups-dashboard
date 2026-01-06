@@ -1,3 +1,4 @@
+import anvil.users
 """This module contains prompt templates for AI calls."""
 
 system_role = """
