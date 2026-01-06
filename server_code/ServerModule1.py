@@ -18,7 +18,7 @@ import numpy as np
 import plotly.graph_objects as go
 #AI
 from openai import OpenAI
-import server_code.prompts_lib as prompts_lib
+from . import prompts_lib
 #logging
 import logging
 import AppLogger

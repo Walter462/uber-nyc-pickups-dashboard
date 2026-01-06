@@ -52,8 +52,8 @@ class Form1(Form1Template):
     self.pickup_hour_coordinate_pairs = hour_map_data['pickup_hour_coordinate_pairs']
     logger.debug("End pickup hour map drawing")
 
-  @handle("submit", "click")
-  def submit_click(self, **event_args):
+  @handle("submit_api", "click")
+  def submit_api_click(self, **event_args):
     """This method is called when the component is clicked."""
     prompt = self.prompt.text
     response = anvil.server.call('get_ai_response', 
@@ -61,3 +61,8 @@ class Form1(Form1Template):
                                 pickup_hour = self.pickup_hour,
                                 pickup_hour_coordinate_pairs = self.pickup_hour_coordinate_pairs)
     self.response.text = response
+
+  @handle("submit_txt", "click")
+  def submit_txt_click(self, **event_args):
+    """This method is called when the component is clicked."""
+    pass
