@@ -67,7 +67,9 @@ theme/                    # UI styling, themes, and templates
 
 2. **Sign up / log in**
    You may use any authentication method you prefer.
+
    <img src="/readme_src/Screenshot%202026-01-06%20at%2018.34.51-1.jpg" width="200" />
+
    *No ads, spam, or messaging — authentication is used only to protect AI resources from bots and abuse.*
 
 3. **Explore pickup patterns**
@@ -75,25 +77,35 @@ theme/                    # UI styling, themes, and templates
    * Examine the **pickups‑per‑hour histogram**
    * Select an hour to visualize pickup density on the NYC map
    * Default view starts at **00:00 (midnight)**
+  
    <img src="/readme_src/Screenshot%202026-01-06%20at%2018.40.37%20copy.png" width="600" />
 
 4. **Customize the AI prompt**
 
    * Modify the user prompt text area to experiment with different GPT requests
-  <img src="/readme_src/Screenshot%202026-01-06%20at%2018.43.10.png" width="1000"/>
+  
+    <img src="/readme_src/Screenshot%202026-01-06%20at%2018.43.10.png" width="1000"/>
+
 5. **Choose response format**
-  ![](/readme_src/Screenshot%202026-01-06%20at%2018.43.52.png)
+  
+     <img src="/readme_src/Screenshot%202026-01-06%20at%2018.43.52.png" width="400" />
+  
+  
    **Show API ready AI response**
+  
    <img src="/readme_src/Screenshot%202026-01-06%20at%2018.56.35.png" width="250" />
+  
    * Demonstrates an LLM response suitable for downstream processing
    * Can be used to generate new maps or points of interest programmatically
 
    **SUBMIT**
-<img src="/readme_src/Screenshot%202026-01-06%20at%2018.56.52.png" width="250" />
+  
+    <img src="/readme_src/Screenshot%202026-01-06%20at%2018.56.52.png" width="250" />
+  
    * Produces standard GPT‑formatted recommendations
    * Includes reasoning and prioritization helpful for drivers
 
-6. **Analyze**
+1. **Analyze**
    Review hotspot suggestions and insights directly in the dashboard.
 
 ---
@@ -108,6 +120,7 @@ The prompt toolkit supports two primary response modes:
   * Automated pipelines
   * Map rendering
   * Further algorithmic processing
+  
    <img src="/readme_src/Screenshot%202026-01-06%20at%2019.01.34.png" width="600" />
 
 * **`output='txt'`**
@@ -116,7 +129,9 @@ The prompt toolkit supports two primary response modes:
   * Street‑level guidance
   * Priority reasoning
   * Contextual insights for drivers
+  
    <img src="/readme_src/Screenshot%202026-01-06%20at%2019.01.10.png" width="600" />
+
 ---
 
 ## Intended Use Cases
