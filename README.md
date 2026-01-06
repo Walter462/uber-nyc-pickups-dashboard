@@ -90,47 +90,40 @@ theme/                    # UI styling, themes, and templates
   
      <img src="/readme_src/Screenshot%202026-01-06%20at%2018.43.52.png" width="400" />
   
-  
-   **Show API ready AI response**
+   5.1. **Show API ready AI response**
   
    <img src="/readme_src/Screenshot%202026-01-06%20at%2018.56.35.png" width="250" />
   
    * Demonstrates an LLM response suitable for downstream processing
    * Can be used to generate new maps or points of interest programmatically
-
-   **SUBMIT**
-  
-    <img src="/readme_src/Screenshot%202026-01-06%20at%2018.56.52.png" width="250" />
-  
-   * Produces standard GPT‑formatted recommendations
-   * Includes reasoning and prioritization helpful for drivers
-
-1. **Analyze**
-   Review hotspot suggestions and insights directly in the dashboard.
-
----
-
-## Output Formats
-
-The prompt toolkit supports two primary response modes:
-
-* **`output='json'`**
-  Enforces strictly valid JSON output, ideal for:
-
-  * Automated pipelines
-  * Map rendering
-  * Further algorithmic processing
+   * `output='json'`
   
    <img src="/readme_src/Screenshot%202026-01-06%20at%2019.01.34.png" width="600" />
-
-* **`output='txt'`**
-  Produces clear, human‑friendly explanations, including:
-
-  * Street‑level guidance
-  * Priority reasoning
-  * Contextual insights for drivers
   
+     Enforces strictly valid JSON output, ideal for:
+      * Automated pipelines
+      * Map rendering
+      * Further algorithmic processing
+
+   5.2 **SUBMIT**
+    
+     <img src="/readme_src/Screenshot%202026-01-06%20at%2018.56.52.png" width="250" />
+    
+     * Produces standard GPT‑formatted recommendations
+     * Includes reasoning and prioritization helpful for drivers
+     * `output='txt'`
+      
    <img src="/readme_src/Screenshot%202026-01-06%20at%2019.01.10.png" width="600" />
+
+     Produces clear, human‑friendly explanations, including:
+
+     * Street‑level guidance
+     * Priority reasoning
+     * Contextual insights for drivers
+
+6. **Analyze**
+   Review hotspot suggestions and insights directly in the dashboard.
+
 
 ---
 
