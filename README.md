@@ -1,90 +1,143 @@
-# [App link](https://spotted-watery-tomorrow.anvil.app)
+# New York City Uber Driver — AI‑Powered Helper
 
-# About This [Anvil](https://anvil.works/?utm_source=github:app_README) App
+🔗 **Live app:** [https://spotted-watery-tomorrow.anvil.app](https://spotted-watery-tomorrow.anvil.app)
 
-### Build web apps with nothing but Python.
+An interactive analytics dashboard and LLM‑assisted helper for exploring historical Uber pickup density in **New York City**. The app helps drivers (and analysts) identify demand hotspots by hour and generate actionable recommendations using large language models.
 
-The app in this repository is built with [Anvil](https://anvil.works?utm_source=github:app_README), the framework for building web apps with nothing but Python. You can clone this app into your own Anvil account to use and modify.
+---
 
-Below, you will find:
-- [How to open this app](#opening-this-app-in-anvil-and-getting-it-online) in Anvil and deploy it online
-- Information [about Anvil](#about-anvil)
-- And links to some handy [documentation and tutorials](#tutorials-and-documentation)
+## Overview
 
-## Opening this app in Anvil and getting it online
+**Uber NYC Pickups Dashboard** is a lightweight prototype built in Python and Anvil. It combines:
 
-### Cloning the app
+* Historical pickup coordinate analysis
+* An interactive, browser‑based dashboard
+* Prompt templates for LLM‑powered hotspot interpretation
 
-Go to the [Anvil Editor](https://anvil.works/build?utm_source=github:app_README) (you might need to sign up for a free account) and click on “Clone from GitHub” (underneath the “Blank App” option):
+The goal is not to replace full‑scale mapping or dispatch systems, but to provide a **driver‑facing analytics assistant** and a **prompt toolkit** that can produce either:
 
-<img src="https://anvil.works/docs/version-control/img/git/clone-from-github.png" alt="Clone from GitHub"/>
+* **Machine‑readable JSON** for downstream automation, or
+* **Human‑readable recommendations** with clear reasoning.
 
-Enter the URL of this GitHub repository. If you're not yet logged in, choose "GitHub credentials" as the authentication method and click "Connect to GitHub".
+**Status:** Prototype
+**Tech stack:** Python · Anvil · LLMs
 
-<img src="https://anvil.works/docs/version-control/img/git/clone-app-from-git.png" alt="Clone App from Git modal"/>
+---
 
-Finally, click "Clone App".
+## Repository Structure
 
-This app will then be in your Anvil account, ready for you to run it or start editing it! **Any changes you make will be automatically pushed back to this repository, if you have permission!** You might want to [make a new branch](https://anvil.works/docs/version-control?utm_source=github:app_README).
+```
+server_code/
+├── prompts_lib.py        # LLM prompt templates for hotspot analysis
+├── ServerModule1.py      # Backend logic and data handling
 
-### Running the app yourself:
+client_code/              # Client UI code and shared utilities
 
-Find the **Run** button at the top-right of the Anvil editor:
+theme/                    # UI styling, themes, and templates
+```
 
-<img src="https://anvil.works/docs/img/run-button-new-ide.png"/>
+### Key Files
 
+* **`server_code/prompts_lib.py`**
+  Prompt templates used to ask an LLM to analyze pickup coordinates and identify demand hotspots. Supports multiple output formats:
 
-### Publishing the app on your own URL
+  * `output='json'`
+  * `output='txt'`
 
-Now you've cloned the app, you can [deploy it on the internet with two clicks](https://anvil.works/docs/deployment/quickstart?utm_source=github:app_README)! Find the **Publish** button at the top-right of the editor:
+* **`server_code/ServerModule1.py`**
+  Backend logic powering the dashboard and LLM interactions.
 
-<img src="https://anvil.works/docs/deployment/img/environments/publish-button.png"/>
+---
 
-When you click it, you will see the Publish dialog:
+## Features
 
-<img src="https://anvil.works/docs/deployment/img/quickstart/empty-environments-dialog.png"/>
+* 📊 **Hourly pickup density analysis** for New York City
+* 🗺️ **Interactive map visualization** of pickup hotspots
+* 🤖 **LLM‑powered recommendations** for drivers
+* 📦 **Structured JSON output** for programmatic workflows
+* 📝 **Readable text guidance** with street‑level prioritization
+* 🪶 **Small, dependency‑light Python codebase**
 
-Click **Publish This App**, and you will see that your app has been deployed at a new, public URL:
+---
 
-<img src="https://anvil.works/docs/deployment/img/quickstart/default-public-environment.png"/>
+## How to Use the Web App
 
-That's it - **your app is now online**. Click the link and try it!
+1. **Open the app**
+   Visit: [https://spotted-watery-tomorrow.anvil.app](https://spotted-watery-tomorrow.anvil.app)
 
-## About Anvil
+2. **Sign up / log in**
+   You may use any authentication method you prefer.
+   *No ads, spam, or messaging — authentication is used only to protect AI resources from bots and abuse.*
 
-If you’re new to Anvil, welcome! Anvil is a platform for building full-stack web apps with nothing but Python. No need to wrestle with JS, HTML, CSS, Python, SQL and all their frameworks – just build it all in Python.
+3. **Explore pickup patterns**
 
-<figure>
-<figcaption><h3>Learn About Anvil In 80 Seconds👇</h3></figcaption>
-<a href="https://www.youtube.com/watch?v=3V-3g1mQ5GY" target="_blank">
-<img
-  src="https://anvil-website-static.s3.eu-west-2.amazonaws.com/anvil-in-80-seconds-YouTube.png"
-  alt="Anvil In 80 Seconds"
-/>
-</a>
-</figure>
-<br><br>
+   * Examine the **pickups‑per‑hour histogram**
+   * Select an hour to visualize pickup density on the NYC map
+   * Default view starts at **00:00 (midnight)**
 
-[![Try Anvil Free](https://anvil-website-static.s3.eu-west-2.amazonaws.com/mark-complete.png)](https://anvil.works?utm_source=github:app_README)
+4. **Customize the AI prompt**
 
-To learn more about Anvil, visit [https://anvil.works](https://anvil.works?utm_source=github:app_README).
+   * Modify the user prompt text area to experiment with different GPT requests
 
-## Tutorials and documentation
+5. **Choose response format**
 
-### Tutorials
+   **JSON (API‑ready)**
 
-If you are just starting out with Anvil, why not **[try the 10-minute Feedback Form tutorial](https://anvil.works/learn/tutorials/feedback-form?utm_source=github:app_README)**? It features step-by-step tutorials that will introduce you to the most important parts of Anvil.
+   * Demonstrates an LLM response suitable for downstream processing
+   * Can be used to generate new maps or points of interest programmatically
 
-Anvil has tutorials on:
-- [Building Dashboards](https://anvil.works/learn/tutorials/data-science#dashboarding?utm_source=github:app_README)
-- [Multi-User Applications](https://anvil.works/learn/tutorials/multi-user-apps?utm_source=github:app_README)
-- [Building Web Apps with an External Database](https://anvil.works/learn/tutorials/external-database?utm_source=github:app_README)
-- [Deploying Machine Learning Models](https://anvil.works/learn/tutorials/deploy-machine-learning-model?utm_source=github:app_README)
-- [Taking Payments with Stripe](https://anvil.works/learn/tutorials/stripe?utm_source=github:app_README)
-- And [much more....](https://anvil.works/learn/tutorials?utm_source=github:app_README)
+   **Text (Human‑readable)**
 
-### Reference Documentation
+   * Produces standard GPT‑formatted recommendations
+   * Includes reasoning and prioritization helpful for drivers
 
-The Anvil reference documentation provides comprehensive information on how to use Anvil to build web applications. You can find the documentation [here](https://anvil.works/docs/overview?utm_source=github:app_README).
+6. **Submit and analyze**
+   Review hotspot suggestions and insights directly in the dashboard.
 
-If you want to get to the basics as quickly as possible, each section of this documentation features a [Quick-Start Guide](https://anvil.works/docs/overview/quickstarts?utm_source=github:app_README).
+---
+
+## Output Formats
+
+The prompt toolkit supports two primary response modes:
+
+* **`output='json'`**
+  Enforces strictly valid JSON output, ideal for:
+
+  * Automated pipelines
+  * Map rendering
+  * Further algorithmic processing
+
+* **`output='txt'`**
+  Produces clear, human‑friendly explanations, including:
+
+  * Street‑level guidance
+  * Priority reasoning
+  * Contextual insights for drivers
+
+---
+
+## Intended Use Cases
+
+* Uber or rideshare drivers seeking data‑driven positioning strategies
+* Prototyping LLM‑assisted geospatial analytics
+* Experimenting with prompt design for structured vs. narrative outputs
+* Educational or exploratory data analysis projects
+
+---
+
+## Built With
+
+* **[Anvil](https://anvil.works/?utm_source=github:app_README)** — full‑stack Python web framework
+* Python, Pandas, NumPy — data handling, data manipulation, sorting backend logic, and prompt generation
+* **LLMs** — hotspot interpretation and recommendation generation
+
+---
+
+## Notes & Limitations
+
+* This is a **prototype**, not a production dispatch or navigation system
+* Pickup data is historical and may not reflect real‑time demand
+* Recommendations should be treated as **decision support**, not guarantees
+
+---
+
