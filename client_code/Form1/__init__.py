@@ -59,10 +59,17 @@ class Form1(Form1Template):
     response = anvil.server.call('get_ai_response', 
                                 prompt = prompt, 
                                 pickup_hour = self.pickup_hour,
-                                pickup_hour_coordinate_pairs = self.pickup_hour_coordinate_pairs)
+                                pickup_hour_coordinate_pairs = self.pickup_hour_coordinate_pairs,
+                                output = 'json')
     self.response.text = response
 
   @handle("submit_txt", "click")
   def submit_txt_click(self, **event_args):
     """This method is called when the component is clicked."""
-    pass
+    prompt = self.prompt.text
+    response = anvil.server.call('get_ai_response', 
+                                prompt = prompt, 
+                                pickup_hour = self.pickup_hour,
+                                pickup_hour_coordinate_pairs = self.pickup_hour_coordinate_pairs,
+                                output = 'txt')
+    self.response.text = response

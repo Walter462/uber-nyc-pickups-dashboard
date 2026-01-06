@@ -88,7 +88,8 @@ def get_map_data(hour: int = 0)->dict:
 @anvil.server.callable
 def get_ai_response(prompt: str, 
                     pickup_hour: int, 
-                    pickup_hour_coordinate_pairs: List[Tuple[float, float]]) -> str:
+                    pickup_hour_coordinate_pairs: List[Tuple[float, float]],
+                    output: str) -> str:
   """
   Uses OpenAI's API to generate a contextual response based on provided map and demand data.
 
@@ -105,7 +106,7 @@ def get_ai_response(prompt: str,
     model="gpt-4.1-mini", # Add or adjust the model you want to use here. See "https://platform.openai.com/docs/models" for the model list
   messages=[
       {"role": "system", "content": prompts_lib.system_role},
-      {"role": "user", "content": prompts_lib.user_role_prompt(prompt, pickup_hour, pickup_hour_coordinate_pairs)}
+      {"role": "user", "content": prompts_lib.user_role_prompt(prompt, pickup_hour, pickup_hour_coordinate_pairs, output)}
   ]
   )
   # Extract the response content
