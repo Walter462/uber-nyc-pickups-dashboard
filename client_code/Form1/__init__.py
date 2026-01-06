@@ -56,6 +56,7 @@ class Form1(Form1Template):
   def submit_api_click(self, **event_args):
     """This method is called when the component is clicked."""
     self.response.text=""
+    self.response.height=58
     prompt = self.prompt.text
     response = anvil.server.call('get_ai_response', 
                                 prompt = prompt, 
@@ -68,7 +69,7 @@ class Form1(Form1Template):
   def submit_txt_click(self, **event_args):
     """This method is called when the component is clicked."""
     self.response.text=""
-    self.response.resize_observer
+    self.response.height=58
     prompt = self.prompt.text
     response = anvil.server.call('get_ai_response', 
                                 prompt = prompt, 
